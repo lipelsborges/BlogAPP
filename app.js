@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const admin = require("./routes/admin")
 const path = require("path")
-//const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 // Configurações
     //Body-Parser
@@ -15,7 +15,12 @@ const path = require("path")
         app.engine('handlebars', engine({defaultLayout: 'main'}));
         app.set('view engine', 'handlebars');
     //Mongoose
-
+        mongoose.Promise = global.Promise;
+        mongoose.connect("mongodb://localhost/blogapp").then(() => {
+            console.log("Conectado ao Banco de Dados!")
+        }).catch((error) => {
+            console.log("Houve um erro ao se conectar ao Banco de Dados: " +error)
+        })
     //Public
         app.use(express.static(path.join(__dirname, "public")))
 //Rotas
