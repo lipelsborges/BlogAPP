@@ -52,5 +52,5 @@ const flash = require("connect-flash")
 // Outros
 const port = 8086
 app.listen(port , () => {
-    console.log("Servidor Rodando! ")
+    console.log("Servidor Rodando na URL: https://localhost:8086/ ")
 })
