@@ -47,7 +47,8 @@ require("./config/auth")(passport)
 
     //Mongoose
         mongoose.Promise = global.Promise;
-        mongoose.connect("mongodb://localhost/blogapp").then(() => {
+        const mongoURI = process.env.MONGO_URI || "mongodb://localhost/blogapp";
+        mongoose.connect(mongoURI).then(() => {
             console.log("Conectado ao Banco de Dados!")
         }).catch((error) => {
             console.log("Houve um erro ao se conectar ao Banco de Dados: " +error)
