@@ -96,5 +96,5 @@ O acesso a todas as rotas em `/admin` é **restrito**.
 
 1. **Clonar o Repositório:**
    ```bash
-   git clone [INSIRA A URL SSH/HTTPS DO SEU REPOSITÓRIO AQUI]
+   git clone [https://github.com/lipelsborges/BlogAPP]
    cd BlogAPP
