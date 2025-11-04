@@ -48,7 +48,10 @@ require("./config/auth")(passport)
     //Mongoose
         mongoose.Promise = global.Promise;
         const mongoURI = process.env.MONGO_URI || "mongodb://localhost/blogapp";
-        mongoose.connect(mongoURI).then(() => {
+        mongoose.connect(mongoURI, {
+            useNewUrlParser: true, 
+            useUnifiedTopology: true, 
+        }).then(() => {
             console.log("Conectado ao Banco de Dados!")
         }).catch((error) => {
             console.log("Houve um erro ao se conectar ao Banco de Dados: " +error)
@@ -120,7 +123,7 @@ require("./config/auth")(passport)
     app.use("/usuarios", usuarios)
     
 // Outros
-const port = 8186
+const port = process.env.PORT || 8186
 app.listen(port , () => {
     console.log("Servidor Rodando na URL: https://localhost:8186/ ")
 })
