@@ -33,6 +33,7 @@ require("./config/auth")(passport)
             res.locals.success_msg = req.flash("success_msg")                      //Uma variavel global !
             res.locals.error_msg = req.flash("error_msg")                          // Uma variavel global !
             res.locals.error = req.flash("error")
+            res.locals.user = req.user || null;
             next()
         })
 
