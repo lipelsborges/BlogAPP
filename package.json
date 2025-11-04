@@ -1,4 +1,23 @@
 {
+  "name": "blogapp",
+  "version": "1.0.0",
+  "description": "Um sistema de Blog simples e funcional desenvolvido com a **stack Node.js**, utilizando o framework Express para o backend e o banco de dados MongoDB para persistência. O projeto é um modelo de arquitetura MVC focado em demonstrar o ciclo completo de um aplicativo web, incluindo autenticação segura e gerenciamento de conteúdo.",
+  "homepage": "https://github.com/lipelsborges/BlogAPP#readme",
+  "bugs": {
+    "url": "https://github.com/lipelsborges/BlogAPP/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lipelsborges/BlogAPP.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.0",
@@ -9,5 +28,6 @@
     "mongoose": "^8.19.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
-  }
+  },
+  "devDependencies": {}
 }
