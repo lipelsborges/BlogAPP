@@ -1,43 +1,100 @@
 # 📌 Blog de Node
 
-Um sistema de Blog simples e funcional desenvolvido com a **stack Node.js**, utilizando o framework Express para o backend e o banco de dados MongoDB para persistência. O projeto foca em demonstrar o ciclo completo de um aplicativo web, incluindo autenticação, validação de dados e segurança.
+Um sistema de Blog simples e funcional desenvolvido com a **stack Node.js**, utilizando o framework Express para o backend e o banco de dados MongoDB para persistência. O projeto é um modelo de arquitetura MVC focado em demonstrar o ciclo completo de um aplicativo web, incluindo autenticação segura e gerenciamento de conteúdo.
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Tecnologias e Dependências
 
-Este projeto foi construído utilizando as seguintes tecnologias principais e as dependências listadas no `package.json`:
+| Pacote | Versão | Função |
+| :--- | :--- | :--- |
+| **Node.js** | `v22.18.0` | Ambiente de execução. |
+| **Express.js** | `^5.1.0` | Framework web principal. |
+| **Mongoose** | `^8.19.2` | ODM para comunicação com MongoDB. |
+| **Passport.js** | `^0.7.0` | Framework de autenticação. |
+| **bcryptjs** | `^3.0.3` | Criptografia de senhas (Hashing). |
+| **express-handlebars** | `^8.0.3` | Template engine (Views). |
+| **bootstrap** | (Incluso no `public/`) | Estilização e responsividade (Versão 5). |
+| **connect-flash** | `^0.1.1` | Mensagens de feedback temporárias (Flash Messages). |
 
-* **Backend:** Node.js (`v22.18.0`)
-* **Framework:** Express.js (Roteamento e Middleware)
-* **Banco de Dados:** MongoDB (via Mongoose ODM)
-* **Autenticação:** Passport.js (Estratégia Local)
-* **Segurança:** bcryptjs (Criptografia de Senha)
-* **Template Engine:** Handlebars (Estrutura da View)
-* **Estilização:** Bootstrap (Design, Componentes e Responsividade)
-* **Middleware:** `body-parser` (Tratamento de dados POST)
-* **Sessões:** `express-session` (Gerenciamento de Sessão)
-* **Mensagens Temporárias:** `connect-flash` (Exibição de mensagens)
+## 📐 Arquitetura e Estrutura
 
-## ✨ Funcionalidades Principais
+O projeto adota o padrão **MVC (Model-View-Controller)** com a seguinte organização:
 
-* **Registro de Usuários:** Cadastro de novos usuários com validação completa.
-* **Login e Logout:** Autenticação de usuários usando Passport.js e Sessões.
-* **Segurança:** Senhas armazenadas de forma segura (Hashed) com bcryptjs.
-* **Mensagens Flash:** Exibição de mensagens de sucesso, erro e aviso após redirecionamentos.
-* **Estrutura MVC Simplificada:** Separação de rotas, modelos e views.
-* **Design:** Interface responsiva e moderna graças ao Bootstrap.
+| Diretório | Conteúdo e Responsabilidade |
+| :--- | :--- |
+| `app.js` | Arquivo principal de configuração (servidor, middlewares, conexão DB). |
+| `models/` | **Modelos Mongoose:** Schemas para `Categoria`, `Postagem` e `Usuário`. |
+| `routes/` | **Controllers/Rotas:** Lógica de requisição-resposta (`admin.js`, `usuario.js`). |
+| `views/` | **Views Handlebars:** Templates de página (HTML/CSS/Handlebars). |
+| `config/` | Configurações do Passport (`auth.js`). |
+| `helpers/` | Middlewares de segurança (`eAdmin.js`). |
+| `public/` | Arquivos estáticos (CSS, JS, Imagens, Bootstrap). |
 
-## ⚙️ Como Instalar e Rodar o Projeto
+## 🔑 Segurança e Autenticação
+
+### Modelos de Usuário
+
+O modelo de `Usuário` (`models/Usuario.js`) define:
+* **Autenticação:** Login via `email` e `senha`.
+* **Segurança:** Senha armazenada em **hash** (criptografada) via `bcryptjs`.
+* **Permissão:** Campo `eAdmin` (`0` ou `1`) para controle de acesso ao painel.
+
+### Middleware de Segurança
+
+O projeto utiliza um *middleware* **`eAdmin`** para proteger todas as rotas da área administrativa (`/admin`), garantindo que apenas usuários com a flag `eAdmin: 1` tenham acesso.
+
+---
+
+## ✨ Funcionalidades do Blog
+
+### 1. Área Pública (Navegação)
+
+| Rota | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `/` | GET | **Home:** Lista as postagens mais recentes e exibe o Jumbotron de boas-vindas. |
+| `/postagem/:slug` | GET | Exibe o conteúdo completo da postagem. |
+| `/categorias` | GET | Lista o índice de categorias disponíveis. |
+| `/categorias/:slug` | GET | Lista todas as postagens filtradas pela categoria. |
+
+### 2. Gerenciamento de Conteúdo (Área Admin)
+
+O acesso a todas as rotas em `/admin` é **restrito**.
+
+#### Categorias (CRUD Completo)
+| Ação | Rotas | Tipo |
+| :--- | :--- | :--- |
+| **Listar** | `/admin/categorias` | GET |
+| **Criar** | `/admin/categorias/add` e `/admin/categorias/nova` | GET / POST |
+| **Editar** | `/admin/categorias/edit/:id` e `/admin/categorias/edit` | GET / POST |
+| **Deletar**| `/admin/categorias/deletar` | POST |
+
+#### Postagens (CRUD Completo)
+| Ação | Rotas | Tipo |
+| :--- | :--- | :--- |
+| **Listar** | `/admin/postagens` | GET |
+| **Criar** | `/admin/postagens/add` e `/admin/postagens/nova` | GET / POST |
+| **Editar** | `/admin/postagens/edit/:id` e `/admin/postagem/edit` | GET / POST |
+| **Deletar**| `/admin/postagens/deletar/:id` | GET |
+
+### 3. Autenticação
+
+| Ação | Rotas | Tipo |
+| :--- | :--- | :--- |
+| **Registro** | `/usuarios/registro` | GET / POST |
+| **Login** | `/usuarios/login` | GET / POST |
+| **Logout** | `/usuarios/logout` | GET |
+
+---
+
+## ⚙️ Instalação e Execução
 
 ### Pré-requisitos
 
-Você precisará ter o **Node.js** e o **MongoDB** instalados em seu sistema.
+* Node.js (`v22.18.0` ou superior)
+* MongoDB (Servidor rodando localmente na porta padrão)
 
-* Node.js (versão mínima `v22.18.0`)
-* MongoDB (Instale o Community Server e garanta que ele está rodando)
+### Passos
 
-### 1. Clonar o Repositório
-
-```bash
-
-git clone [https://github.com/lipelsborges/BlogAPP.git](https://github.com/lipelsborges/BlogAPP.gits)
-cd BlogAPP
+1. **Clonar o Repositório:**
+   ```bash
+   git clone [INSIRA A URL SSH/HTTPS DO SEU REPOSITÓRIO AQUI]
+   cd BlogAPP
