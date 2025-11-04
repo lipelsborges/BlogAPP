@@ -2,6 +2,8 @@ const express = require("express")
 const router = express.Router()
 const moongose = require("mongoose")
 require("../models/Usuario")
+const Usuario = moongose.model("usuarios")
+const bcrypt = require("bcryptjs")
 
 router.get("/registro" , (req, res) => {
     res.render("usuarios/registro")
@@ -36,6 +38,40 @@ router.post("/registro" , (req, res) => {
 
     }else{
 
+        Usuario.findOne({email: req.body.email}).then((usuario) => {
+            if(usuario){
+                req.flash("error_msg", "E-mail ja cadastrado")
+                res.redirect("/usuarios/registro")
+            }else{
+                const novoUsuario = new Usuario({
+                    nome: req.body.nome,
+                    email: req.body.email,
+                    senha: req.body.senha
+                })
+
+                bcrypt.genSalt(10, (erro, salt) => {
+                    bcrypt.hash(novoUsuario.senha, salt, (erro, hash) => {
+                        if(erro){
+                            req.flash("error_msg", "Houve um erro durante o salvamento do usuário.")
+                            res.redirect("/")
+                        }
+
+                        novoUsuario.senha = hash
+
+                        novoUsuario.save().then(() => {
+                            req.flash("success_msg", "Usuário criado com sucesso!")
+                            res.redirect("/")
+                        }).catch((error) => {
+                            req.flash("error_msg", "Houve um erro ao criar o usuário, tente novamente!")
+                            res.redirect("/usuarios/registro")
+
+                        })
+                    })
+                })
+            }
+        }).catch((error) => {
+            req.flash("error_msg", "Houve um erro interno")
+        })
     }
 
 })
