@@ -15,6 +15,7 @@ const Categoria = mongoose.model("categorias")
 const usuarios = require("./routes/usuario");
 const passport = require('passport');
 require("./config/auth")(passport)
+const db = require('./config/db')
 
 // Configurações
     //Sessão
@@ -46,12 +47,7 @@ require("./config/auth")(passport)
         app.set('view engine', 'handlebars');
 
     //Mongoose
-        mongoose.Promise = global.Promise;
-        const mongoURI = process.env.MONGO_URI || "mongodb://localhost/blogapp";
-        mongoose.connect(mongoURI, {
-            useNewUrlParser: true, 
-            useUnifiedTopology: true, 
-        }).then(() => {
+        mongoose.connect(db.mongoURI).then(() => {
             console.log("Conectado ao Banco de Dados!")
         }).catch((error) => {
             console.log("Houve um erro ao se conectar ao Banco de Dados: " +error)
@@ -123,7 +119,7 @@ require("./config/auth")(passport)
     app.use("/usuarios", usuarios)
     
 // Outros
-const port = process.env.PORT || 8186
-app.listen(port , () => {
-    console.log("Servidor Rodando na URL: https://localhost:8186/ ")
+const PORT = process.env.PORT || 8186
+app.listen(PORT , () => {
+    console.log("Servidor Rodando")
 })
