@@ -1,14 +1,13 @@
 <div class="p-5 mb-4 bg-light rounded-3">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Bem-vindo ao Blog do Node</h1>
-
         <h5 class="mt-4">Este é um BLOG simples, desenvolvido com Node.js + Express + MongoDB.</h5>
         <hr class="my-4">
 
         <h5>Aqui você vai poder ler sobre as novidades do mundo da computação.</h5>
 
         {{#unless user}}
-            <a href="/usuarios/registro"><button class="btn btn-primary btn-lg" type="button">Crie uma conta</button></a>
+        <a href="/usuarios/registro"><button class="btn btn-primary btn-lg" type="button">Crie uma conta</button></a>
         {{/unless}}
     </div>
 </div>
@@ -18,17 +17,20 @@
 <h2>Postagens recentes: </h2>
 <br>
 {{#each postagens}}
-<div class="card mt-4"> 
+<div class="card mt-4">
     <div class="card-body">
-        
-        <h3>{{titulo}}</h3> 
+        <h3>{{titulo}}</h3>
         <p>{{descricao}}</p>
-        <a href="/postagem/{{slug}}"><button class="btn btn-success">Leia mais</button></a>
-        <hr> 
-        <small>Categoria: {{categoria.nome}}</small><br>
-        <small>Data de publicação: {{data}}</small>
+        <a href="/postagem/{{slug}}" class="btn btn-success">Leia mais</a> 
+        <hr>
+        
+                <div class="text-muted pt-1"> 
+            <small>Categoria: **{{categoria.nome}}**</small><br>
+            <small>Data de publicação: **{{data}}**</small>
+        </div>
+        
     </div>
 </div>
 {{else}}
-    <h5>Nenhuma postagem</h5>
+<h5>Nenhuma postagem</h5>
 {{/each}}
