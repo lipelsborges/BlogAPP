@@ -1,10 +1,11 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
 
 
 :root {
     --fundo-escuro: #121212;      
     --card-escuro: #1F1F1F;       
-    --roxo-neon: #BB00FF;         
+    --roxo-neon: #BB00FF;        
     --azul-neon: #00FFFF;         
     --texto-claro: #E0E0E0;       
 }
@@ -14,22 +15,25 @@ body {
     background-color: var(--fundo-escuro) !important;
     color: var(--texto-claro) !important;
     font-family: 'Rajdhani', sans-serif;
-    
     padding-top: 56px; 
 }
 
 
-.navbar {
-    background-color: var(--card-escuro) !important;
-    border-bottom: 2px solid var(--roxo-neon); 
-    box-shadow: 0 0 10px rgba(187, 0, 255, 0.5); 
+p {
+    color: var(--texto-claro) !important;
 }
 
+
+
+.navbar {
+    background-color: var(--card-escuro) !important;
+    border-bottom: 2px solid var(--roxo-neon);
+    box-shadow: 0 0 10px rgba(187, 0, 255, 0.5);
+}
 
 .navbar-nav .nav-link, .navbar-brand {
     color: var(--texto-claro) !important;
 }
-
 
 .navbar-nav .nav-link:hover {
     color: var(--azul-neon) !important;
@@ -39,34 +43,41 @@ body {
 
 h1, h2 {
     color: var(--azul-neon) !important;
-    text-shadow: 0 0 8px var(--azul-neon); 
+    text-shadow: 0 0 8px var(--azul-neon);
     font-weight: 700;
 }
 
 
-.card, .jumbotron {
+.container, .card, .jumbotron { 
     background-color: var(--card-escuro) !important;
-    border: 1px solid var(--roxo-neon); /
-    box-shadow: 0 0 10px rgba(187, 0, 255, 0.5); 
-    margin-bottom: 20px; 
+    border: 1px solid var(--roxo-neon);
+    box-shadow: 0 0 10px rgba(187, 0, 255, 0.5);
+    margin-bottom: 20px;
+    padding: 20px; /
+    border-radius: 5px;
+}
+
+
+.container p, .container div, .container h3, .container span, 
+.card p, .jumbotron p, .card h3 {
+    color: var(--texto-claro) !important; 
 }
 
 
 .btn-primary {
     background-color: var(--roxo-neon) !important;
     border-color: var(--roxo-neon) !important;
-    box-shadow: 0 0 15px var(--roxo-neon); 
-    color: var(--fundo-escuro) !important; 
+    box-shadow: 0 0 15px var(--roxo-neon);
+    color: var(--fundo-escuro) !important;
     font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: var(--azul-neon) !important; 
+    background-color: var(--azul-neon) !important;
     border-color: var(--azul-neon) !important;
     box-shadow: 0 0 20px var(--azul-neon);
 }
-
 
 .btn-success {
     background-color: var(--azul-neon) !important;
